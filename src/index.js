@@ -1,17 +1,42 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import './index.css'
+import React, { useState, useEffect } from 'react'
+import ReactDOM from 'react-dom'
+import Card from './components/Card'
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+function App() {
+  const [characters, setCharacters] = useState([])
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+  useEffect(() => {
+    getAllCharacters()
+  }, [])
+
+  function getAllCharacters(url = 'https://rickandmortyapi.com/api/character') {
+    fetch(url)
+      .then(res => res.json())
+      .then(data => {
+        // data is this object: {info: ..., results: ...}
+
+        // https://reactjs.org/docs/hooks-reference.html#functional-updates
+        setCharacters(oldState => [...oldState, ...data.results])
+
+        const nextUrl = data.info.next // contains the next url, if it exists
+        nextUrl && getAllCharacters(nextUrl) // if nextUrl exists, fetch it
+      })
+  }
+
+  const randomCharacters = characters
+    .sort(() => 0.5 - Math.random())
+    .slice(0, 10)
+  randomCharacters.push(...randomCharacters)
+  randomCharacters.sort(() => 0.5 - Math.random())
+
+  return (
+    <>
+      {randomCharacters.map(character => (
+        <Card image={character.image} />
+      ))}
+    </>
+  )
+}
+
+ReactDOM.render(<App />, document.body)
