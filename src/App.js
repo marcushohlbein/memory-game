@@ -20,15 +20,9 @@ function App() {
     characters,
   ])
 
-  function checkCardsAreSimilar(selectedCards) {
-    if (selectedCards.length === 2) {
-      return selectedCards[0].name === selectedCards[1].name
-    }
-  }
-
   function checkCardMatch(character) {
-    if (selectedCards.length === 2) {
-      checkCardsAreSimilar() &&
+    if (selectedCards.length > 1) {
+      selectedCards[0].name === selectedCards[1].name &&
         setFoundPairs(previousState => [...previousState, ...selectedCards])
       setSelectedCards([])
       setSelectedCards(oldState => [...oldState, character])

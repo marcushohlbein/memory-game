@@ -7,7 +7,7 @@ function Card({ id, name, image, handleClick, selectedCards, foundPairs }) {
     <>
       <div
         className={
-          selectedCards.includes(id) || foundPairs.includes(id)
+          selectedCards.includes(name) || foundPairs.includes(name)
             ? 'Card'
             : 'Card Card--active'
         }
