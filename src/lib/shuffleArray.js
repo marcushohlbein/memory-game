@@ -1,17 +1,12 @@
-function shuffleArray(array) {
-  let counter = array.length
-
-  while (counter > 0) {
-    let index = Math.floor(Math.random() * counter)
-
-    counter--
-
-    let temp = array[counter]
-    array[counter] = array[index]
-    array[index] = temp
-  }
-
-  return array
+function shuffleArray(characters) {
+  return characters
+    .sort(() => 0.5 - Math.random())
+    .splice(0, 18)
+    .flatMap(shuffledCharacter => [
+      shuffledCharacter,
+      { ...shuffledCharacter, id: shuffledCharacter.id + ' copy' },
+    ])
+    .sort(() => 0.5 - Math.random())
 }
 
 export default shuffleArray

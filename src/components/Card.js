@@ -1,17 +1,17 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './Card.css'
 import placeholder from '../assets/card-back.jpeg'
 
-function Card({ id, image, handleClick, isMatch }) {
-  const [isVisible, setIsVisible] = useState(false)
-
+function Card({ id, name, image, handleClick, selectedCards, foundPairs }) {
   return (
     <>
       <div
-        className={isVisible ? 'Card Card--active' : 'Card'}
-        //className={isMatch.includes(id) ? 'Card Card--active' : 'Card'}
+        className={
+          selectedCards.includes(id) || foundPairs.includes(id)
+            ? 'Card'
+            : 'Card Card--active'
+        }
         onClick={() => {
-          setIsVisible(!isVisible)
           handleClick()
         }}
       >
