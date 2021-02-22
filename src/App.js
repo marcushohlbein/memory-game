@@ -21,8 +21,8 @@ function App() {
   ])
 
   useEffect(() => {
-    if (foundPairs.length === 36) {
-      console.log('You won!!')
+    if (foundPairs.length === 34) {
+      alert('You won!!')
     }
   }, [foundPairs])
 
