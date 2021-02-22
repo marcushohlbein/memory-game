@@ -6,7 +6,7 @@ import './App.css'
 
 function App() {
   const [characters, setCharacters] = useState([])
-  const [selectedCards, setSelectedCards] = useState([]) //selectedCards
+  const [selectedCards, setSelectedCards] = useState([])
   const [foundPairs, setFoundPairs] = useState([])
 
   useEffect(() => {
@@ -20,14 +20,28 @@ function App() {
     characters,
   ])
 
-  function checkCardMatch(character) {
+  useEffect(() => {
+    if (foundPairs.length === 36) {
+      console.log('You won!!')
+    }
+  }, [foundPairs])
+
+  function cleanId(id) {
+    if (typeof id === 'string') {
+      return Number(id.replace(' copy', ''))
+    } else {
+      return Number(id)
+    }
+  }
+
+  function checkCardMatch(index) {
     if (selectedCards.length > 1) {
-      selectedCards[0].name === selectedCards[1].name &&
+      cleanId(selectedCards[0]) === cleanId(selectedCards[1]) &&
         setFoundPairs(previousState => [...previousState, ...selectedCards])
       setSelectedCards([])
-      setSelectedCards(oldState => [...oldState, character])
+      setSelectedCards(oldState => [...oldState, index])
     } else {
-      setSelectedCards(oldState => [...oldState, character])
+      setSelectedCards(oldState => [...oldState, index])
     }
   }
   return (
@@ -38,7 +52,7 @@ function App() {
           id={character.id}
           image={character.image}
           name={character.name}
-          handleClick={() => checkCardMatch(character)}
+          handleClick={() => checkCardMatch(character.id)}
           selectedCards={selectedCards}
           foundPairs={foundPairs}
         />

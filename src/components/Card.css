@@ -1,9 +1,8 @@
 .Card,
 .front,
 .back {
-  margin: 0 10px 5px 0;
-  height: 125px;
-  width: 125px;
+  min-width: 100px;
+  height: 100px;
 }
 
 .Card {

@@ -1,15 +1,15 @@
 import React from 'react'
-import './Card.css'
 import placeholder from '../assets/card-back.jpeg'
+import './Card.css'
 
-function Card({ id, name, image, handleClick, selectedCards, foundPairs }) {
+function Card({ id, image, handleClick, selectedCards, foundPairs }) {
   return (
     <>
       <div
         className={
-          selectedCards.includes(name) || foundPairs.includes(name)
-            ? 'Card'
-            : 'Card Card--active'
+          selectedCards.includes(id) || foundPairs.includes(id)
+            ? 'Card Card--active'
+            : 'Card'
         }
         onClick={() => {
           handleClick()
@@ -21,9 +21,9 @@ function Card({ id, name, image, handleClick, selectedCards, foundPairs }) {
           alt=""
           loading="lazy"
           width="100"
-          height="125"
+          height="100"
         />
-        <img className="back" src={image} alt="" width="100" height="125" />
+        <img className="back" src={image} alt="" width="100" height="100" />
       </div>
     </>
   )
